@@ -1,0 +1,51 @@
+services:
+  # Establesco los servicios que necesito para mi aplicación
+  # En este caso, necesito un servicio para mi aplicación, un servicio para la base de datos y un servicio para el servidor SMTP
+  app:
+    build:
+      # Es para especificar la ruta donde se encuentra el Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      # Establezco el puerto que se va a exponer en el contenedor
+      - "8000:8000"
+    depends_on:
+      # Establezco las dependencias de mi servicio
+      - mysql
+      - smtp
+    environment:
+      # Establezco las variables de entorno que necesita mi aplicación
+      MAIL_SERVER: smtp
+      MAIL_PORT: 1025
+      SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:root@mysql:3306/bankingapp
+    networks:
+      # Establezco la red a la que pertenece mi servicio
+      - finservice_network
+    restart: always # Establezco la política de reinicio del contenedor
+
+  mysql:
+    image: mysql:8.0 # Imagen de MySQL
+    environment:
+      MYSQL_DATABASE: bankingapp             
+      MYSQL_PASSWORD: root                   
+      MYSQL_ROOT_PASSWORD: root              
+    ports:
+      - "3306:3306"                          
+    networks:
+      - finservice_network
+    restart: always
+    
+  smtp:
+    image: mailhog/mailhog # Imagen de MailHog
+    container_name: smtp
+    ports:
+      - "1025:1025"  # MailHog SMTP port
+      - "8025:8025"  # MailHog Web interface for viewing mails
+    networks:
+      - finservice_network
+    restart: always
+
+
+networks:
+  finservice_network:
+    driver: bridge

@@ -1,0 +1,2 @@
+#Framework prinicpal para la creación de la API
+fastapi[standard]==0.115.11
