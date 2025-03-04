@@ -1,2 +1,6 @@
 #Framework prinicpal para la creación de la API
 fastapi[standard]==0.115.11
+
+#libreria para conectar cualquier base de datos a la API
+sqlmodel==0.0.23
+PyMySQL==1.1.1
