@@ -1,15 +1,12 @@
-from sqlmodel import Column, ForeignKey, Integer, String, Table
+from typing import Optional
 
-from config.db import engine, meta
+from sqlmodel import Field, SQLModel
 
-users = Table(
-    "users",
-    meta,
-    Column("id", Integer, primary_key=True),
-    Column("name", String),
-    Column("password", String),
-    Column("email", String),
-    Column("address", String),
-    Column("phote", String),
-)
-meta.create_all(engine)
+
+class User(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    password: str
+    email: str
+    address: str
+    phone: str
