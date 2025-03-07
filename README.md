@@ -1,4 +1,5 @@
 # PasarePagos
+
 # 🏦 The Game is HackathON Python Backend Challenge 🐍
 
 Category   ➡️   Software
@@ -42,7 +43,7 @@ hackathon-caixabank-backend-py-bankingapp/
 
 #### Task 0: Dockerfile
 
-se realiza la configuración del Dockerfile para la correcta ejecución de la aplicación en el cual se crea un contender en el cual se ejecytan los 3 servicios que se van a utilizar en la aplicación.
+se realiza la configuración del Dockerfile para la correcta ejecución de la aplicación en el cual se crea un contender en el cual se ejecutan los 3 servicios que se van a utilizar en la aplicación.
 
 1. App: Es el servicio principal de la aplicación en el cual se ejecuta la aplicación el cual esta realizado con FastAPI.
 2. Database: Es el servicio de la base de datos en el cual se ejecuta una base de datos de MySQL.
@@ -52,10 +53,11 @@ Todo lo anterior se realizo con Docker-compose.
 
 #### Task 1: User Actions
 
-This task focuses on basic user-related actions such as registering a new user, logging in, retrieving user and account details, and logging out. For these actions, you will need to interact with several endpoints, some of which require authentication.
+Esta tarea se centra en las acciones básicas relacionadas con los usuarios, como el registro de un nuevo usuario, el inicio de sesión, la recuperación de los detalles del usuario y de la cuenta, y el cierre de sesión. Para estas acciones, tendrá que interactuar con varios puntos finales, algunos de los cuales requieren autenticación.
 
-- **User Registration**: Implement the functionality to register a user by sending the required information like name, email, phone number, and password. This registration should return the account number, which will be used for future operations.
+- **User Registration**: Implementar la funcionalidad para registrar un usuario enviando la información requerida como nombre, correo electrónico, número de teléfono y contraseña. Este registro debe devolver el número de cuenta, que se utilizará para futuras operaciones.
     Request body:
+
     ```json
     {
         "name":"Nuwe Test",
@@ -65,7 +67,9 @@ This task focuses on basic user-related actions such as registering a new user, 
         "phoneNumber":"666888116"
     }
     ```
+
     Response:
+
     ```json
     {
         "name": "Nuwe Test",
@@ -76,16 +80,15 @@ This task focuses on basic user-related actions such as registering a new user, 
         "hashedPassword": "$2a$10$vYWBxACqEIPeoT0O5b0faOHp4ITAHSBvoHDzBePW7tPqzpvqKLi6G"
     }
     ```
-    The accountNumber must be created and assigned to the account automatically by the app and be a UUID.
-    
+    El accountNumber debe ser creado y asignado a la cuenta automáticamente por la aplicación y ser un UUID.
+
     Checks should include:
-    - No empty fields.
-    - The email format must be valid.
-    - Password rules to be detailed later.
-    - Check if the email or phoneNumber already exists.
+    -Los cheques deben incluir:
+    -El formato del correo electrónico debe ser válido.
+    -Las reglas de contraseña se detallarán más adelante.
+    -Comprueba si el correo electrónico o el número de teléfono ya existen.
 
-
-- **User Login**: Implement a login mechanism using either an email or account number along with a password. After successful authentication, the system should return a JWT token, which will be used for all protected endpoints.
+- **User Login**: Implemente un mecanismo de inicio de sesión utilizando un correo electrónico o un número de cuenta junto con una contraseña. Tras una autenticación correcta, el sistema debe devolver un token JWT, que se utilizará para todos los extremos protegidos.
     Request body:
     ```json
     {
@@ -100,13 +103,13 @@ This task focuses on basic user-related actions such as registering a new user, 
     }
     ```
 
-    If the identifier is invalid it returns the following with Status Code 400:
+    Si el identificador no es válido devuelve lo siguiente con el código de estado 400:
 
     ```
-    User not found for the given identifier: nuwee@nuwe.com 
+    Usuario no encontrado para el identificador dado: nuwee@nuwe.com 
     ```
 
-    If the password is invalid it returns the following with Status Code 401:
+    Si la contraseña no es válida devuelve lo siguiente con el código de estado 401:
 
     ```
     Bad credentials
